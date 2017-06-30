@@ -8,25 +8,30 @@ class GameWindow < Gosu::Window
     @background_image = Gosu::Image.new("img/sky_png.png", :tileable => true)
 
     @player = Player.new
-    # starting position
+    # @hud = Hud.new
     @player.warp(100, 100)
   end
 
   def update
     if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft then
       @player.turn_left
+      # @hud.button_txt = 'left'
     end
     if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight then
       @player.turn_right
+      # @hud.button_txt = 'right'
     end
     if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpButton0 then
       @player.accelerate
+      # @hud.button_txt = 'go faster'
     end
     @player.move
   end
 
   def draw
+    # @hud.draw
     @player.draw
+    # @myFont.draw("this")
     @background_image.draw(0, 0, 0);
   end
 
@@ -37,6 +42,18 @@ class GameWindow < Gosu::Window
   end
 end
 
+
+# class Hud
+#   attr_accessor(:button_txt)
+#
+#   def initialize
+#     @button_font = Gosu::Font.new()
+#   end
+#
+#   def draw
+#     @button_font("this", 20, 20, 1, scale_x = 1, scale_y = 1, color = 0xff_ffffff)
+#   end
+# end
 
 class Player
   def initialize

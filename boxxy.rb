@@ -48,9 +48,9 @@ class MyWindow < Window
   def button_down(id)
     case id
     when Gosu::KbLeft
-      @player1.x_vel = -5
+        @player1.x_vel = -5
     when Gosu::KbRight
-      @player1.x_vel = 5
+        @player1.x_vel = 5
     end
   end
 
@@ -63,12 +63,12 @@ class MyWindow < Window
     end
   end
 
-  def update
+  def update  ### UPDATE ############################
     frame_count
     @player1.move
   end
 
-  def draw
+  def draw ### DRAW ##################################
     draw_rect(0, 0, 500, 480, 0x400000ff)       # sky
     draw_grass
     @player1.draw(0x90ff0000)
@@ -90,7 +90,16 @@ class Player
   end
 
   def move
-    @x += @x_vel
+    if @x_vel == -5  ### LEFT
+      if ((@x - @x_vel) > 0)
+        @x += @x_vel
+      end
+    end
+    if @x_vel == 5   ### RIGHT
+      if ((@x + @x_vel) < (WINDOW_WIDTH - 20))
+        @x += @x_vel
+      end
+    end
     @y += @y_vel
   end
 
